@@ -1,1 +1,2 @@
 # topicsearch
+This is a basic topic search app which takes the user input and runs it through 2 api's simultaneously. The 2 api's are Youtube and GNews. Once searched, youll be displayed with 4 interactive youtube video cards, and 4 related news articles with links to the original article. If the images dont display, try clicking the search button again. This app was made with: html5, css3, Jquery, Javascript, and ajax.

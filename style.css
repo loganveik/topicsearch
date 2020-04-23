@@ -1,0 +1,36 @@
+body{
+    background-size: cover;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.navbar{
+    background-color: black;
+    color: yellow;
+    font-size: 400px;
+}
+
+#searchbtn{
+    background-color: yellow;
+}
+
+.searchform{
+    background-color: white;
+    color: black;
+}
+
+.footertext{
+    text-align: center;
+    display: inline;
+    line-height: 50px;
+    color: black;
+}
+.footertext:hover{
+    color: blue;
+}
+
+footer{
+    margin-top: auto;
+}
