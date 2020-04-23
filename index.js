@@ -9,19 +9,12 @@ $("#searchbtn").on("click", function (event) {
 function ytajax() {
     event.preventDefault();
     const topic = $("#topicinput").val().trim();
-    console.log(topic);
+    const key = "AIzaSyAnkNPhRa4N57dDV07gK4FIMqWRQ5_0qAY";
     $.ajax({
-        type: 'GET',
-        url: 'https://www.googleapis.com/youtube/v3/search',
-        data: {
-            key: 'AIzaSyAnkNPhRa4N57dDV07gK4FIMqWRQ5_0qAY',
-            q: topic,
-            part: 'snippet',
-            maxResults: 4,
-            type: 'video',
-            videoEmbeddable: true
-        }
+        url: "https://www.googleapis.com/youtube/v3/search?q=" + topic + "&videoEmbeddable=true&type=video&maxResults=4&part=snippet&key=" + key,
+        method: "GET"
     }).then(function (response) {
+        console.log(response)
         if (topic === "") {
             const undefinedCatch = $("<h5>you must search something!</h5>");
             $(".youtubeview").append(undefinedCatch);
@@ -38,14 +31,12 @@ function ytajax() {
 function newsajax() {
     event.preventDefault();
     const topic = $("#topicinput").val().trim();
-    console.log(topic);
     const key = "e590bd0e1fce64b3ee41e7994ea8d73a";
     const queryURL = "https://gnews.io/api/v3/search?q=" + topic + "&token=" + key + "&max=4&image=required";
     $.ajax({
-        type: 'GET',
+        method: "GET",
         url: queryURL
     }).then(function (response) {
-        console.log(response)
         const result = response.articles;
         for (let i = 0; i < result.length; i++) {
             const col = $("<div class='col-lg-6'></div>");
