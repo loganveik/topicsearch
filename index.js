@@ -14,7 +14,6 @@ function ytajax() {
         url: "https://www.googleapis.com/youtube/v3/search?q=" + topic + "&videoEmbeddable=true&type=video&maxResults=4&part=snippet&key=" + key,
         method: "GET"
     }).then(function (response) {
-        console.log(response)
         if (topic === "") {
             const undefinedCatch = $("<h5>you must search something!</h5>");
             $(".youtubeview").append(undefinedCatch);
