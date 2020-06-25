@@ -1,32 +1,33 @@
 $("#searchbtn").on("click", function (event) {
     event.preventDefault();
-    ytajax();
+    // ytajax();
     newsajax();
-    $(".youtubeview").empty();
-    $(".row").empty();
+    giphyajax();
+    // $(".youtubeview").empty();
+    $("#newsrow").empty();
+    $("#gifrow").empty();
 });
 
-function ytajax() {
-    event.preventDefault();
-    const topic = $("#topicinput").val().trim();
-    const key = "AIzaSyAnkNPhRa4N57dDV07gK4FIMqWRQ5_0qAY";
-    $.ajax({
-        url: "https://www.googleapis.com/youtube/v3/search?q=" + topic + "&videoEmbeddable=true&type=video&maxResults=4&part=snippet&key=" + key,
-        method: "GET"
-    }).then(function (response) {
-        console.log(response)
-        if (topic === "") {
-            const undefinedCatch = $("<h5>you must search something!</h5>");
-            $(".youtubeview").append(undefinedCatch);
-        } else {
-            const result = response.items;
-            for (let i = 0; i < result.length; i++) {
-                const iFrame = "<iframe width='200px' height='200px' class='my-2 mx-2' src='https://www.youtube.com/embed/" + result[i].id.videoId + "'></iframe>";
-                $(".youtubeview").append(iFrame);
-            }
-        }
-    })
-}
+// function ytajax() {
+//     event.preventDefault();
+//     const topic = $("#topicinput").val().trim();
+//     const key = "AIzaSyAnkNPhRa4N57dDV07gK4FIMqWRQ5_0qAY";
+//     $.ajax({
+//         url: "https://www.googleapis.com/youtube/v3/search?q=" + topic + "&videoEmbeddable=true&type=video&maxResults=4&part=snippet&key=" + key,
+//         method: "GET"
+//     }).then(function (response) {
+//         if (topic === "") {
+//             const undefinedCatch = $("<h5>you must search something!</h5>");
+//             $(".youtubeview").append(undefinedCatch);
+//         } else {
+//             const result = response.items;
+//             for (let i = 0; i < result.length; i++) {
+//                 const iFrame = "<iframe width='200px' height='200px' class='my-2 mx-2' src='https://www.youtube.com/embed/" + result[i].id.videoId + "'></iframe>";
+//                 $(".youtubeview").append(iFrame);
+//             }
+//         }
+//     })
+// }
 
 function newsajax() {
     event.preventDefault();
@@ -46,7 +47,30 @@ function newsajax() {
             const desc = $("<p>" + result[i].description.toLowerCase() + "</p>");
             card.append(image,title,desc);
             col.append(card);
-            $(".row").append(col);
+            $("#newsrow").append(col);
         }
     })
 }
+
+function giphyajax() {
+    event.preventDefault();
+    const topic = $("#topicinput").val().trim();
+    const key = "5gI1IKY5fW6QcPmVN5SXPtvkB8LDBHWe";
+    const queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topic + "&api_key=" + key + "&limit=3";
+    $.ajax({
+        method: "GET",
+        url: queryURL
+    }).then(function (response) {
+        const result = response.data;
+        for (let i = 0; i < result.length; i++) {
+            const col = $("<div class='col-lg-4'></div>");
+            const card = $("<div class='card-body my-3'></div>");
+            const gif =$("<img style='height: 150px;' src=" + '"' + result[i].images.preview_gif.url + '"' + ">");
+            card.append(gif);
+            col.append(card);
+            $("#gifrow").append(col);
+        }
+    })
+}
+
+
